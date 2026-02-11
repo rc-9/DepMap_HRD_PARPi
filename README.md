@@ -57,7 +57,11 @@ Despite this mechanistic rationale and clinical success, whether large-scale pre
 
 The purpose of this project is to systematically explore DepMap cancer cell lines, identify models screened with PARP inhibitors, construct biologically-grounded HRD classifications, and answer the following question:
 
+---
+
 **Under established HRD frameworks, what quantitative relationship exists between HRD status and PARP inhibitor response across DepMap cancer cell lines?**
+
+---
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
