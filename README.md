@@ -6,6 +6,8 @@
 <p style="font-size:0.8em; color:gray; margin-top:-10px; text-align:right;">
 <em>Image Source: Protein Data Bank | 5DS3</em>
 </p>
+<p align="right"><em>Image Source: Protein Data Bank | 5DS3</em></p>
+
 
 
 <h1 align="center">Integrative Analysis of HRD and PARPi Drug Response</h1>
