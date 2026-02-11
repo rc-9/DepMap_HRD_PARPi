@@ -10,9 +10,9 @@
 
 
 
-<h1 align="center">Integrative Analysis of HRD and PARPi Drug Response</h1>
+<h2 align="center">Integrative Analysis of HRD and PARPi Drug Response</h2>
 <!-- <h1 align="center">HRD Profiling & PARP Inhibitor Response</h1> -->
-<h4 align="center">A functional genomics framework for classifying homologous recombination deficiency<br> and mapping PARP inhibitor sensitivity across DepMap cancer cell lines.</h4>
+<h5 align="center">A functional genomics framework for classifying homologous recombination deficiency<br> and mapping PARP inhibitor sensitivity across DepMap cancer cell lines.</h5>
   <p align="center">
     <br />
     <a href="https://github.com/rc-9/DepMap_HRD_PARPi/issues">Report Bug</a>
