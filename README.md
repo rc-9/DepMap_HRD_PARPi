@@ -7,7 +7,9 @@
 <em>Image Source: Protein Data Bank | 5DS3</em>
 </p> --> 
 <p align="right"><em>Image Source: Protein Data Bank | 5DS3</em></p>
-<p align="right"><em>$\tiny{\color{gray}{\text{Image Source: Protein Data Bank | 5DS3}}}$</em></p>
+<p align="right"><em>$${\color{grey}Image \space Source: \space Protein \space Data \space Bank \space | \space  \space 5DS3}$$</em></p>
+
+<p align="right"><em>$$\tiny{\color{gray}{\text{Image Source: Protein Data Bank | 5DS3}}}$$</em></p>
 
 
 <h1 align="center">Integrative Analysis of HRD and PARPi Drug Response</h1>
