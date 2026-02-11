@@ -1,7 +1,7 @@
 [![Issues][issues-shield]][issues-url]
 
 
-![headerimage](images/PARPi_olaparib_5DS3.png)
+![headerimage](images/PARPi_olaparib_5DS3_src.png)
 <!-- <img src="images/PARPi_olaparib_5DS3.png" alt="headerimage" width="800"> -->
 <!-- <p style="font-size:0.8em; color:gray; margin-top:-10px; text-align:right;">
 <em>Image Source: Protein Data Bank | 5DS3</em>
