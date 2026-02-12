@@ -31,7 +31,6 @@
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#key-findings">Key Findings</a></li>
     <li><a href="#conclusions">Conclusions</a></li>
-    <li><a href="#usage">Usage</a></li>
   </ol>
 </details>
 
