@@ -81,7 +81,7 @@ The following datasets were extracted from [DepMap](https://depmap.org/portal/da
 - Cancer Cell Line Model Metadata
 - Drug Response Data (PRISM Secondary Screens)
 - Omics Somatic Mutations Matrix (Damaging Variants)
-- Omics Global Signatures (LOH, CIN, WGD, aneuploidy)
+- Omics Global Signatures (LOH, CIN, WGD, Aneuploidy)
 
 All datasets were harmonized using the DepMap `ModelID` to ensure cross-release compatibility. The analysis cohort was defined by selecting cell lines screened with PARP inhibitors and merging with corresponding metadata. For PRISM drug screens with replicates (from multiple wells or experimental runs), median AUC was used to collapse values per model-drug pair. Additional data validation steps were also performed to confirm data quality and structural integrity.
 
@@ -89,15 +89,15 @@ All datasets were harmonized using the DepMap `ModelID` to ensure cross-release 
 
 HRD status was defined using complementary, biologically informed frameworks.
 
-**BRCA-driven HRD**:<br/>
+BRCA-driven HRD:<br/>
 Cell lines harboring damaging alterations in BRCA1 or BRCA2 were classified as HRD+ under a canonical mutation-based definition.
 
-**Genomic scar–based HRD**:<br/>
+Genomic scar–based HRD:<br/>
 A composite genomic instability score was derived from available proxies of chromosomal damage. To transform this continuous score into a binary label, a two-component Gaussian Mixture Model (GMM) was fitted to the score distribution. The analytical intersection of the inferred components provided a data-driven threshold, defining HRD+ and HRD- subpopulations without reliance on arbitrary percentile cutoffs.
 
 ![gmm](images/gmm.png)
 
-**Unified HRD definition**:<br/>
+Unified HRD definition:<br/>
 A final binary feature (`HRD_positive`) was defined as the union of BRCA-driven and genomic scar–based classifications, prioritizing sensitivity while preserving biological interpretability.
 
 The engineered HRD features were merged with PARP inhibitor response data to generate an analysis-ready dataset of 731 unique cell line models across 13 PARPi drugs.
@@ -114,7 +114,23 @@ Together, this multi-level framework provided a systematic assessment of the str
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#### Key Findings
+### Key Findings
+
+
+**HRD Landscape Across Cell Lines**:<br/>
+HRD status varies by lineage, with ovarian, breast, and pancreatic models most frequently HRD-positive. Canonical and atypical HRD cases were captured using combined BRCA1/2 mutations, HR pathway alterations, and genomic scar metrics.
+
+<!-- ![lineages](images/lineages.png) -->
+
+**PARP Inhibitor Response Patterns**:<br/>
+Drug sensitivity across 13 PARPi shows lineage-specific trends for some agents (e.g., olaparib, talazoparib), but overall responses are heterogeneous. Standard 2D assays do not consistently reproduce expected clinical HRD–PARPi sensitivity.
+
+![lineage_auc_heatmap](images/lineage_auc_heatmap.png)
+
+**HRD vs PARPi Sensitivity**:<br/>
+Although the results varied across the different PARPi drugs, correlation analyses revealed that canonical HRD markers, including BRCA1/2 mutations and genomic scar–based HRD scores, did not consistently predict PARP inhibitor sensitivity in vitro.
+
+![auc_per_parp](images/auc_per_parp.png)
 
 
 
@@ -125,7 +141,7 @@ Together, this multi-level framework provided a systematic assessment of the str
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-#### Conclusions
+### Conclusions
 
 
 
@@ -137,14 +153,6 @@ Together, this multi-level framework provided a systematic assessment of the str
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 
-# Usage
-
-- ```hrd_feature_engineering.ipynb```: 
-
-- ```parpi_response_analysis.ipynb```:
-
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 
 
