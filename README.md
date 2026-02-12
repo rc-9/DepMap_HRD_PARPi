@@ -44,7 +44,7 @@ Cancer arises from the accumulation of genetic and epigenetic alterations that d
 
 HRD is clinically significant because it creates therapeutically exploitable vulnerabilities. Poly (ADP-ribose) polymerase (**PARP**) is an enzyme that facilitates repair of single-strand DNA lesions. If these lesions persist into DNA replication, replication fork collapse can generate double-strand breaks. In HRD cells, these breaks cannot be accurately repaired. Therefore, pharmacologic inhibition of PARP induces **synthetic lethality**: the combined loss of HR function and PARP-mediated repair overwhelms DNA repair capacity, leading to accumulation of DNA damage and selective cancer cell death.
 
-![02_PARPi_pathway](images/02_PARPi_pathway.png)
+![02_PARPi_pathway](images/02_PARPi_pathway_v2.png)
 
 On this basis, PARP inhibitors (PARPi) are approved across multiple malignancies enriched for HRD, particularly those harboring BRCA mutations. Linking HRD-associated molecular features with drug response provides a framework for identifying therapeutic vulnerabilities and advancing precision oncology.
 
