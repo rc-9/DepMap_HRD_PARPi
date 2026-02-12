@@ -65,16 +65,54 @@ The purpose of this project is to systematically explore DepMap cancer cell line
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
-#### Methodology
+### Methodology
 
+This project was conducted in multiple phases:
 
+- `hrd_feature_engineering.ipynb` walks through data acquisition, harmonization, and feature engineering steps used to construct a unified HRD status for each cell line.
 
+- `parpi_response_analysis.ipynb` builds on the processed dataset to explore PARP inhibitor response patterns and quantitatively evaluate the association between HRD status and drug sensitivity.
 
+A detailed overview of each section is outlined below.
 
+#### Data Acquisition and Harmonization
 
+The following datasets were extracted from [DepMap](https://depmap.org/portal/data_page/?tab=allData):
+- Cancer Cell Line Model Metadata
+- Drug Response Data (PRISM Secondary Screens)
+- Omics Somatic Mutations Matrix (Damaging Variants)
+- Omics Global Signatures (LOH, CIN, WGD, aneuploidy)
+
+All datasets were harmonized using the DepMap `ModelID` to ensure cross-release compatibility. The analysis cohort was defined by selecting cell lines screened with PARP inhibitors and merging with corresponding metadata. For PRISM drug screens with replicates (from multiple wells or experimental runs), median AUC was used to collapse values per model-drug pair. Additional data validation steps were also performed to confirm data quality and structural integrity.
+
+#### HRD Feature Engineering
+
+HRD status was defined using complementary, biologically informed frameworks.
+
+**BRCA-driven HRD**:<br/>
+Cell lines harboring damaging alterations in BRCA1 or BRCA2 were classified as HRD+ under a canonical mutation-based definition.
+
+**Genomic scar–based HRD**:<br/>
+A composite genomic instability score was derived from available proxies of chromosomal damage. To transform this continuous score into a binary label, a two-component Gaussian Mixture Model (GMM) was fitted to the score distribution. The analytical intersection of the inferred components provided a data-driven threshold, defining HRD+ and HRD- subpopulations without reliance on arbitrary percentile cutoffs.
+
+![gmm](images/gmm.png)
+
+**Unified HRD definition**:<br/>
+A final binary feature (`HRD_positive`) was defined as the union of BRCA-driven and genomic scar–based classifications, prioritizing sensitivity while preserving biological interpretability.
+
+The engineered HRD features were merged with PARP inhibitor response data to generate an analysis-ready dataset of 731 unique cell line models across 13 PARPi drugs.
+
+#### Response Normalization Across Compounds
+
+Because raw AUC distributions vary across compounds, response values were standardized within each drug to enable cross-drug comparability. Scaling was performing using median centered followed by division by the interquartile range (IQR), preserving rank structure while limiting the influence of outliers. Under this transformation, zero represents the typical response for a given drug, negative values denote relative sensitivity, and positive values indicate relative resistance.
+
+#### Statistical Evaluation of the HRD–PARPi Association
+
+The relationship between HRD status and PARP inhibitor response was evaluated at multiple levels. Global comparisons assessed overall distributional differences across the aggregated inhibitors. Per-drug analyses quantified heterogeneity in both effect magnitude and statistical significance. Nonparametric methods were used to compare response distributions without imposing normality assumptions. Exploratory lineage-stratified visualizations were further used to probe potential tissue-level confounding.
+
+Together, this multi-level framework provided a systematic assessment of the strength, direction, and consistency of HRD-associated differences in PARP inhibitor sensitivity across diverse DepMap cancer cell line models.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
-
 
 #### Key Findings
 
