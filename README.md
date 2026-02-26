@@ -38,7 +38,7 @@
 # Project Walkthrough
 
 
-## Background
+## 1. Background
 
 Cancer arises from the accumulation of genetic and epigenetic alterations that disrupt normal cellular growth and DNA repair mechanisms. A central mechanism for maintaining genomic integrity is homologous recombination (**HR**), a high-fidelity pathway that repairs DNA double-strand breaks using an intact sister chromatid as a template. Deficiencies in this process, collectively termed as homologous recombination deficiency (**HRD**), can result from mutations in key genes such as BRCA1/2, epigenetic silencing, or other genomic alterations, ultimately leading to genomic instability.
 
@@ -56,7 +56,7 @@ Despite this mechanistic rationale and clinical success, whether large-scale pre
 ---
 ---
 
-## Research Question
+## 2. Research Question
 
 The purpose of this project is to systematically explore DepMap cancer cell lines, identify models screened with PARP inhibitors, construct biologically-grounded HRD classifications, and answer the following question:
 
@@ -68,7 +68,7 @@ The purpose of this project is to systematically explore DepMap cancer cell line
 ---
 ---
 
-## Methodology
+## 3. Methodology
 
 This project was conducted in multiple phases to separate the HRD feature engineering components with the main drug response study. The first iteration of the project (v1: `hrd_feature_engineering.ipynb` & `parpi_response_analysis.ipynb`) encompasses the entire cell line cohort, including each available PARP inhibitor compound across all cancer lineages. The second iteration focuses the study on clinically approved PARP inhibitors and restricts the cohort to the approved indications. Notebooks 1-6 walk through data acquisition, harmonization, and feature engineering steps used to construct a unified HRD status for the curated dataset, while the final notebook quantitatively evaluates the association between HRD status and drug sensitivity.
 
@@ -76,7 +76,7 @@ A detailed overview of each section is outlined below.
 
 ---
 
-### Data Acquisition and Harmonization
+### 3a. Data Acquisition and Harmonization
 
 The following datasets were extracted from [DepMap](https://depmap.org/portal/data_page/?tab=allData):
 - Cancer Cell Line Model Metadata
@@ -97,7 +97,7 @@ Next, HRD status was defined using three complementary, biologically-informed fr
 
 ---
 
-### HRD Feature Engineering: BRCA1 / BRCA2 Alterations
+### 3b. HRD Feature Engineering: BRCA1 / BRCA2 Alterations
 
 BRCA1 and BRCA2 are core components of the HR DNA repair pathway and loss-of-function alterations resulting in **biallelic inactivation** ("two-hit" events) of either gene leads to HRD. This can happen through several mechanisms: (1) germline pathgenic mutation or damaging somatic mutations + LOH; (2) two independent somatic mutations; (3) homozygous deletion of the gene; (4) promoter hypermethylation (or other epigenetic silencing). DepMap data allows for defining BRCA-based HRD through two of these mechanisms: somatic mutation + copy number loss and homozygous deletion. 
 
@@ -109,7 +109,7 @@ Based on the derived LOH and deep deletion flags, a singular BRCA-based HRD stat
 
 ---
 
-### HRD Feature Engineering: Proxy HRD Score (v1)
+### 3c. HRD Feature Engineering: Proxy HRD Score (v1)
 
 A genomic instability score was derived from available proxies of chromosomal damage (LOH, CIN, WGD, Aneuploidy). To transform this continuous score into a binary label, a two-component Gaussian Mixture Model (GMM) was fitted to the score distribution. The analytical intersection of the inferred components provided a data-driven threshold, defining HRD+ and HRD- subpopulations without reliance on arbitrary percentile cutoffs.
 
@@ -117,7 +117,7 @@ A genomic instability score was derived from available proxies of chromosomal da
 
 ---
 
-### HRD Feature Engineering: HRD Scores (external sources)
+### 3d. HRD Feature Engineering: HRD Scores (external sources)
 
 A composite HRD sum that integrates loss of heterozygosity (LOH), telomeric allelic imbalance (TAI), and large-scale state transtions (LST) was fetched externally to derive a canonical genomic scar-based HRD label. This was designed to be the second component for the final unified HRD score, with the proxy alternative available for unlabeled cell lines.
 
@@ -125,7 +125,7 @@ A composite HRD sum that integrates loss of heterozygosity (LOH), telomeric alle
 
 ---
 
-### HRD Feature Engineering: COSMIC Mutational Signatures
+### 3e. HRD Feature Engineering: COSMIC Mutational Signatures
 
 The **Catalogue Of Somatic Mutations In Cancer (COSMIC)** is a curated repository of somatic mutations across thousands of cancer genomes. COSMIC defines **mutational signatures**, which are reproducible patterns of nucleotide changes that reflect underlying biological processes, such as DNA repair deficiencies or exposure to specific mutagens. **Single Base Substitution (SBS) signatures** quantify the probability of a specific nucleotide change within a trinucleotide context. Specifically, **SBS3** is strongly associated with HRD. Leveraging externally-fetched SBS3 exposure values, non-zero SBS3 counts were flagged and used to generate the final HRD label used for this study.
 
@@ -133,19 +133,19 @@ The **Catalogue Of Somatic Mutations In Cancer (COSMIC)** is a curated repositor
 
 ---
 
-### HRD Feature Engineering: Unified HRD+ Label
+### 3f. HRD Feature Engineering: Unified HRD+ Label
 
 A final binary feature was defined as the union of BRCA-driven, genomic scar–based, and SBS3 classifications, prioritizing sensitivity while preserving biological interpretability. (An alternate unified label was also created using the stricter std-based thresholds for each of the individual components. A more restrictive labeling did not change any results and therefore was dropped for the final modules.)
 
 ---
 
-### Response Normalization Across Compounds
+### 3g. Response Normalization Across Compounds
 
 Because raw AUC distributions vary across compounds, response values were standardized within each drug to enable cross-drug comparability. Scaling was performing using median centered followed by division by the interquartile range (IQR), preserving rank structure while limiting the influence of outliers. Under this transformation, zero represents the typical response for a given drug, negative values denote relative sensitivity, and positive values indicate relative resistance.
 
 ---
 
-### Statistical Evaluation of the HRD–PARPi Association
+### 3h. Statistical Evaluation of the HRD–PARPi Association
 
 Finally, the relationship between HRD status and PARP inhibitor response was evaluated at multiple levels. Global comparisons assessed overall distributional differences across the aggregated inhibitors. Per-drug analyses quantified heterogeneity in both effect magnitude and statistical significance. Nonparametric methods were used to compare response distributions without imposing normality assumptions. Exploratory lineage-stratified visualizations were further used to probe potential tissue-level confounding.
 
@@ -157,17 +157,21 @@ Together, this multi-level framework provided a systematic assessment of the str
 ---
 ---
 
-## Key Findings
+## 4. Key Findings
 
 **(1) HRD landscape varies across DepMap cell line models.**<br/>
 HRD status varies by lineage, with ovarian, breast, and pancreatic models most frequently classified as HRD-positive. Both canonical (BRCA1/2-mutant, SBS3) and non-BRCA HRD-like cases were captured using the combined mutation and genomic scar framework. A closer look at HRD status across the primary four lineages is displayed below.
 
 ![07_hrd_landscape](images/07_hrd_landscape.png)
 
+---
+
 **(2) PARP inhibitors show heterogenous response profiles.**<br/>
 Drug response distributions differ substantially across compounds. Some agents (e.g., Talazoparib) demonstrate lower median AUC values, indicating stronger overall cytotoxicity, whereas others (e.g., Veliparib, S-111) show narrow, right-shifted distributions with limited variability. Several inhibitors (e.g., PJ-34) display wider dispersion or multimodal patterns, suggesting potential biological subgroups. A closer look at the clinically-approved PARP inhibitors is shown below.
 
 ![08_parpi_main](images/08_parpi_main.png)
+
+---
 
 **(3) PARP inhibitors differ substantially in usable dynamic range.**<br/>
 Drug response variability is not uniform across compounds. Quantification of dispersion using the robust 95th–5th percentile range reveals marked differences in separability across models. Several agents (e.g., S-111, Veliparib, Iniparib) exhibit compressed distributions with minimal spread, limiting the ability to detect biological stratification. Others (e.g., AZD2461, E7449, PJ-34) demonstrate broader ranges and higher coefficients of variation, providing greater opportunity to observe phenotype–drug associations.
@@ -176,11 +180,15 @@ These properties are critical for interpretation: limited dynamic range can mask
 
 ![06_drug_rspn_variability](images/06_drug_rspn_variability.png)
 
+---
+
 **(4) Although a global association between HRD status and PARPi response (AUC) was statistically detectable across some drug-cancer combinations, a focused study on the primary clinical indications and approved drugs did not show a clear difference across the *in vitro* cell lines.**<br/>
 
 The association between HRD status and drug response (AUC) varies by the PARPi compound. When evaluated within individual drugs, only a subset demonstrate significant HRD-linked differences (e.g., Olaparib, Niraparib, Endo-IWR-1). For many inhibitors, group medians are similar and hypothesis tests are not significant. This variability aligns with observed differences in dynamic range and response heterogeneity across compounds. However, looking closer at the primary four drugs across the approved indications showed no statistically significant associations when integrading multiple canonical HRD definitions.
 
 ![9_pvals](images/9_pvals.png)
+
+---
 
 **(5) HRD status and drug response (AUC) varies by the tissue lineage (and even subtypes).**<br/>
 
@@ -191,6 +199,8 @@ Interestingly, some subtypes exhibited deviations from the expected trend. For e
 These observations indicate that while HRD status broadly informs PARP inhibitor response, the effect can be context-dependent at the subtype level, highlighting the value of stratifying by finer histological resolution when exploring lineage-specific vulnerabilities. The heatmap emphasizes that subtypes within the same primary lineage may differ subtly in HRD-associated drug response, even when the overall lineage effect is minimal.
 
 ![10_heatmap](images/10_heatmap.png)
+
+---
 
 **(6) Drug identity and tissue lineage explain more variance than HRD alone.**<br/>
 Regression models incorporating drug and tissue lineage account for substantially more variability in AUC than HRD status alone. After adjustment, the HRD coefficient attenuates and loses statistical significance, suggesting that baseline pharmacologic differences and lineage structure contribute strongly to observed response patterns.
