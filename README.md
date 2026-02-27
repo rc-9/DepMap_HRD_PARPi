@@ -174,7 +174,7 @@ Drug response distributions differ substantially across compounds. Some agents (
 ---
 
 **(3) PARP inhibitors differ substantially in usable dynamic range.**<br/>
-Drug response variability is not uniform across compounds. Quantification of dispersion using the robust 95th–5th percentile range reveals marked differences in separability across models. Several agents (e.g., S-111, Veliparib, Iniparib) exhibit compressed distributions with minimal spread, limiting the ability to detect biological stratification. Others (e.g., AZD2461, E7449, PJ-34) demonstrate broader ranges and higher coefficients of variation, providing greater opportunity to observe phenotype–drug associations.
+Drug response variability is not uniform across compounds. Examining this dispersion using the robust 95th–5th percentile range reveals marked differences in separability across models. Several agents (e.g., S-111, Veliparib, Iniparib) exhibit compressed distributions with minimal spread, limiting the ability to detect biological stratification. Others (e.g., AZD2461, E7449, PJ-34) demonstrate broader ranges and higher coefficients of variation, providing greater opportunity to observe phenotype–drug associations.
 
 These properties are critical for interpretation: limited dynamic range can mask real biological effects, whereas wider distributions increase statistical sensitivity. Variation in downstream HRD results should therefore be interpreted in the context of each compound’s intrinsic measurement characteristics rather than assumed to reflect absence of biology.
 
@@ -182,9 +182,11 @@ These properties are critical for interpretation: limited dynamic range can mask
 
 ---
 
-**(4) Although a global association between HRD status and PARPi response (AUC) was statistically detectable across some drug-cancer combinations, a focused study on the primary clinical indications and approved drugs did not show a clear difference across the *in vitro* cell lines.**<br/>
+**(4) Although a global association between HRD status and PARPi response (AUC) was statistically detectable across some drug-cancer combinations, a focused study on the primary clinical indications and approved drugs did not show a significant difference across the *in vitro* cell lines.**<br/>
 
-The association between HRD status and drug response (AUC) varies by the PARPi compound. When evaluated within individual drugs, only a subset demonstrate significant HRD-linked differences (e.g., Olaparib, Niraparib, Endo-IWR-1). For many inhibitors, group medians are similar and hypothesis tests are not significant. This variability aligns with observed differences in dynamic range and response heterogeneity across compounds. However, looking closer at the primary four drugs across the approved indications showed no statistically significant associations when integrading multiple canonical HRD definitions.
+The association between HRD status and drug response (AUC) varies by the PARPi compound. When evaluated within individual drugs, only a subset demonstrate significant HRD-linked differences (e.g., Olaparib, Niraparib, Endo-IWR-1). For many inhibitors, group medians are similar and hypothesis tests are not significant. This variability aligns with observed differences in dynamic range and response heterogeneity across compounds. 
+
+However, looking closer at the primary four drugs across the approved indications showed no statistically significant associations when integrating multiple canonical HRD definitions.
 
 ![9_pvals](images/9_pvals.png)
 
@@ -196,7 +198,7 @@ Although breaking down each lineage into subtypes did not materially alter the o
 
 Interestingly, some subtypes exhibited deviations from the expected trend. For example, Invasive Breast Carcinoma showed a positive delta for Talazoparib (HRD+ median AUC > HRD− median AUC), suggesting that HRD+ cells in this subtype were slightly less sensitive than their HRD− counterparts. Other breast subtypes, and ovarian subtypes like High-Grade Serous Ovarian Cancer, displayed modest negative or near-zero deltas, reflecting minor increases in sensitivity or negligible differences.
 
-These observations indicate that while HRD status broadly informs PARP inhibitor response, the effect can be context-dependent at the subtype level, highlighting the value of stratifying by finer histological resolution when exploring lineage-specific vulnerabilities. The heatmap emphasizes that subtypes within the same primary lineage may differ subtly in HRD-associated drug response, even when the overall lineage effect is minimal.
+These observations indicate that while HRD status broadly informs PARP inhibitor response, the effect can be context-dependent at the subtype level, highlighting the value of stratifying by finer histological resolution when exploring lineage-specific vulnerabilities. The following heatmap emphasizes that subtypes within the same primary lineage may differ subtly in HRD-associated drug response, even when the overall lineage effect is minimal.
 
 ![10_heatmap](images/10_heatmap.png)
 
@@ -221,7 +223,9 @@ This project developed an integrated framework linking homologous recombination 
 
 In pooled analyses (v1), HRD-positive models exhibited statistically detectable differences in response with modest effect size. However, this did not translate to a curated cohort that studied the four primary drugs across the main indications, especially when restricted to canonical HRD labeling in lieu of the proxy derivations. When examined at the individual drug level, only a subset demonstrated noticeable, but statistically insignificant HRD-related separation. These associations further attenuated after adjustment for compound and tissue lineage in multivariable models. Collectively, these findings suggest that HRD status alone provides limited predictive power for PARP inhibitor sensitivity across heterogeneous *in vitro* cancer models. The results also highlight that statistically significant differences do not always translate into meaningful predictive performance.
 
-Future work should explore more nuanced representations of DNA repair dysfunction, integrate additional molecular covariates, and explicitly model interaction effects that may better explain context-specific therapeutic response. In particular, replacing the threshold-based HRD engineering with established labels validated by the scientific community across DepMap's cell lines would strengthen biological interpretability, improve cross-study comparability, and reduce reliance on dataset-specific thresholding strategies. As outlined in the [original study](https://pmc.ncbi.nlm.nih.gov/articles/PMC10847511/), there could be external factors that are contributing to the discrepancy between the clinical and cell culture results. The lack of a strong association may reflect confounding by drug potency, differential lineage susceptibility, or incomplete capture of functional HRD beyond genomic annotations. Nonetheless, this baseline study establishes a foundation for lineage and drug-aware evaluation of PARP inhibitor sensitivity and shows the importance of multivariable modeling when interpreting biomarker effects.
+Future work should explore more nuanced representations of DNA repair dysfunction, integrate additional molecular covariates, and explicitly model interaction effects that may better explain context-specific therapeutic response. In particular, replacing the threshold-based HRD engineering with established labels validated by the scientific community across DepMap's cell lines would strengthen biological interpretability, improve cross-study comparability, and reduce reliance on dataset-specific thresholding strategies. 
+
+As outlined in the [reference study](https://pmc.ncbi.nlm.nih.gov/articles/PMC10847511/), there could be external factors that are contributing to the discrepancy between the clinical and cell culture results. The lack of a strong association may reflect confounding by drug potency, differential lineage susceptibility, or incomplete capture of functional HRD beyond genomic annotations. Nonetheless, this project establishes a foundation for lineage and drug-based evaluation of PARP inhibitor sensitivity and shows the importance of multivariable modeling when interpreting biomarker effects.
 
 
 <p align="right">(<a href="#top">back to top</a>)</p>
