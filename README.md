@@ -127,7 +127,7 @@ A composite HRD sum that integrates loss of heterozygosity (LOH), telomeric alle
 
 ### 3e. HRD Feature Engineering: COSMIC Mutational Signatures
 
-The **Catalogue Of Somatic Mutations In Cancer (COSMIC)** is a curated repository of somatic mutations across thousands of cancer genomes. COSMIC defines **mutational signatures**, which are reproducible patterns of nucleotide changes that reflect underlying biological processes, such as DNA repair deficiencies or exposure to specific mutagens. **Single Base Substitution (SBS) signatures** quantify the probability of a specific nucleotide change within a trinucleotide context. Specifically, **SBS3** is strongly associated with HRD. Leveraging externally-fetched SBS3 exposure values, non-zero SBS3 counts were flagged and used to generate the final HRD label used for this study.
+The **Catalogue Of Somatic Mutations In Cancer (COSMIC)** is a curated repository of somatic mutations across thousands of cancer genomes. COSMIC defines **mutational signatures**, which are reproducible patterns of nucleotide changes that reflect underlying biological processes, such as DNA repair deficiencies or exposure to specific mutagens. **Single Base Substitution (SBS) signatures** quantify the probability of a specific nucleotide change within a trinucleotide context. Specifically, **SBS3** is strongly associated with HRD. Leveraging externally-fetched SBS3 exposure values, non-zero SBS3 counts were flagged to generate the final HRD label used for this study.
 
 ![06_sbs3](images/06_sbs3.png)
 
@@ -135,7 +135,7 @@ The **Catalogue Of Somatic Mutations In Cancer (COSMIC)** is a curated repositor
 
 ### 3f. HRD Feature Engineering: Unified HRD+ Label
 
-A final binary feature was defined as the union of BRCA-driven, genomic scar–based, and SBS3 classifications, prioritizing sensitivity while preserving biological interpretability. (An alternate unified label was also created using the stricter std-based thresholds for each of the individual components. A more restrictive labeling did not change any results and therefore was dropped for the final modules.)
+A singular binary feature was defined as the union of BRCA-driven, genomic scar–based, and SBS3 classifications, prioritizing sensitivity while preserving biological interpretability. (An alternate unified label was also created using the stricter std-based thresholds for each of the individual components. A more restrictive labeling did not change any results and therefore was dropped for the final modules.)
 
 ---
 
